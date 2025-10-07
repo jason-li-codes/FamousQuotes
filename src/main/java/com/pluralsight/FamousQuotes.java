@@ -23,41 +23,32 @@ public class FamousQuotes {
 
         boolean isRunning = true;
 
-        do {
-
-        System.out.println("Please pick a number from 1-10 to get a quote!");
-        int quoteNum = input.nextInt();
-
-            System.out.println(quotes[quoteNum - 1]);
+        while (isRunning) {
 
             System.out.println("""
-                    Would you like to hear another quote?
-                    (1) Yes
-                    (2) Random quote
-                    (3) Exit program
+                    Would you like to hear a quote?
+                    (1-10) Pick a number to see a quote or...
+                    (0) Pick a random quote
+                    (X) Exit program
                     """);
 
-            int option = input.nextInt();
+            String choice = input.nextLine().trim();
 
-            switch (option) {
-                case 1:
-                    break;
-                case 2:
-                    quoteNum = (int)(Math.random() * 10 + 1);
-                    break;
-                case 3:
-                    System.out.println("EXITING....");
-                    isRunning = false;
-                    break;
+            if (1 <= Integer.parseInt(choice) && Integer.parseInt(choice) <= 10) {
+                System.out.println(quotes[Integer.parseInt(choice) - 1]);
+            } else if (Integer.parseInt(choice) == 0) {
+                System.out.println(quotes[(int) (Math.random() * 10 + 1)]);
+            } else if (choice.charAt(0) == 'X') {
+                System.out.println("Exiting....");
+                isRunning = false;
             }
 
-        } while (isRunning);
-
-
-
-
+        }
 
     }
+
+
+}
 
 
 }
