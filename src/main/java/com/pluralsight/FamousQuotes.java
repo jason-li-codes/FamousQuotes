@@ -38,39 +38,67 @@ public class FamousQuotes {
                     """);
 
 
-            // contains all menu choice outputs in try case
-            try {
-                // takes in user input for menu choice, with line eating buffer
-                int choice = input.nextInt();
-                input.nextLine();
-                // begins with a switch case looking at int choice
-                switch (choice) {
-                    // in case 1, prints appropriate quote from 1-10 using index using input again
-                    case 1:
-                        System.out.println("Pick a number from 1-10.");
-                        int quoteNum = input.nextInt();
-                        // eats buffer
-                        input.nextLine();
-                        System.out.println(quotes[quoteNum - 1]);
-                        break;
-                    // in case 2, print quote using random index from 0-9
-                    case 2:
-                        System.out.println(quotes[(int) (Math.random() * 10)]);
-                        break;
-                    // in case 3, exits program by changing isRunning to false
-                    case 3:
-                        System.out.println("Exiting....");
-                        isRunning = false;
-                        break;
-                }
-            // catches exception
-            } catch (Exception e) {
-                // if input for choice or quoteNum is a number out of bounds or a string, catches exception
-                System.out.println("You have entered an invalid input. Try again.");
-                e.printStackTrace();
+            // takes in user input for menu choice, with line eating buffer
+            int choice = getValidNumber();
+
+            // begins with a switch case looking at int choice
+            switch (choice) {
+                // in case 1, prints appropriate quote from 1-10 using index using input again
+                case 1:
+                    System.out.println("Pick a number from 1-10.");
+                    int quoteNum = getValidNumber();
+                    if (1 <= quoteNum && quoteNum <= 10) {
+                    System.out.println(quotes[quoteNum - 1]);
+                    }
+                    else {
+                        System.out.println("Invalid number, please try again.");
+                    }
+                    break;
+                // in case 2, print quote using random index from 0-9
+                case 2:
+                    System.out.println(quotes[(int) (Math.random() * 10)]);
+                    break;
+                // in case 3, exits program by changing isRunning to false
+                case 3:
+                    System.out.println("Exiting....");
+                    isRunning = false;
+                    break;
+                // if a different number is chosen, retries
+                default:
+                    System.out.println("Incorrect menu option, please try again.");
             }
 
         }
+    }
+
+    // method for validating number input
+    public static int getValidNumber() {
+
+        // initializes inputNumber and boolean badInput
+        int inputNumber = 0;
+        boolean badInput = false;
+
+        // uses do/while loop
+        do {
+
+            // sets badInput to false first
+            badInput = false;
+
+            //tries to get an input
+            try {
+                inputNumber = input.nextInt();
+            // if it can't read as int, throws exception with error message and sets badInput to true to try again
+            } catch (Exception e) {
+                System.out.println("I didn't understand, please try again.");
+                badInput = true;
+            }
+            // eats buffer
+            input.nextLine();
+        // conditional checks badInput boolean
+        } while (badInput);
+
+        // returns the correct inputNumber as an int
+        return inputNumber;
 
     }
 
