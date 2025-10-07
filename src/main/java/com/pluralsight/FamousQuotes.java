@@ -27,28 +27,37 @@ public class FamousQuotes {
 
             System.out.println("""
                     Would you like to hear a quote?
-                    (1-10) Pick a number to see a quote or...
-                    (0) Pick a random quote
-                    (X) Exit program
+                    (1) Pick a number to see a quote or...
+                    (2) Pick a random quote
+                    (3) Exit program
                     """);
 
-            String choice = input.nextLine().trim();
+            int choice = input.nextInt();
+            input.nextLine();
 
-            if (1 <= Integer.parseInt(choice) && Integer.parseInt(choice) <= 10) {
-                System.out.println(quotes[Integer.parseInt(choice) - 1]);
-            } else if (Integer.parseInt(choice) == 0) {
-                System.out.println(quotes[(int) (Math.random() * 10 + 1)]);
-            } else if (choice.charAt(0) == 'X') {
-                System.out.println("Exiting....");
-                isRunning = false;
+            try {
+                switch (choice) {
+                    case 1:
+                        System.out.println("Pick a number from 1-10.");
+                        int quoteNum = input.nextInt();
+                        input.nextLine();
+                        System.out.println(quotes[quoteNum - 1]);
+                        break;
+                    case 2:
+                        System.out.println(quotes[(int) (Math.random() * 10)]);
+                        break;
+                    case 3:
+                        System.out.println("Exiting....");
+                        isRunning = false;
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("You have entered an invalid input. Try again.");
+                e.printStackTrace();
             }
 
         }
 
     }
-
-
-}
-
 
 }
