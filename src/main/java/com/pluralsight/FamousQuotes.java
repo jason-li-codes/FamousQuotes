@@ -37,12 +37,12 @@ public class FamousQuotes {
                     (3) Exit program
                     """);
 
-            // takes in user input for menu choice, with line eating buffer
-            int choice = input.nextInt();
-            input.nextLine();
 
             // contains all menu choice outputs in try case
             try {
+                // takes in user input for menu choice, with line eating buffer
+                int choice = input.nextInt();
+                input.nextLine();
                 // begins with a switch case looking at int choice
                 switch (choice) {
                     // in case 1, prints appropriate quote from 1-10 using index using input again
